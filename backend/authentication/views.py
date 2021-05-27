@@ -1,9 +1,9 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import status, permissions
+from rest_framework import status, permissions, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer
+from .models import CustomUser
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -25,3 +25,9 @@ class HelloWorldView(APIView):
     
     def get(self, request):
         return Response(data={"hello":"world"}, status=status.HTTP_200_OK)
+
+class NewHelloView(APIView):
+    permission_classes = [permissions.AllowAny]
+    
+    def get(self, request):
+        return Response(data={"hello":"world", "net":"ninja"}, status=status.HTTP_200_OK)
