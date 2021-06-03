@@ -18,6 +18,7 @@ axiosInstance.interceptors.response.use(
     error => {
         const originalRequest = error.config;
 
+        console.log(error);
         // Prevent infinite loops
         if (error.response.status === 401 && originalRequest.url === baseURL+'token/refresh/') {
             window.location.href = '/login/';

@@ -1,17 +1,12 @@
-import useFetch from "./userFetch";
+import useAxios from "./useAxios";
+import userFetch from "./userFetch";
+import { useEffect } from 'react';
 import axiosInstance from "./axiosApi";
-import { useState, useEffect } from 'react';
-
 
 const Login = () => {
-    const [data , setData] = useState(null);
-    const [isPending, setIsPending] = useState(true);
-    const [error, setError] = useState(null);
 
-    axiosInstance.get('/newhello/')
-    .then(function (response){
-        setData(response.data);
-    });
+    // const {data, isPending, error} = userFetch('http://localhost:8000/api/newhello/');
+    const {data, isPending, error} = useAxios('/newhello/');
 
     return ( <div className="Login">
         <h2>{data && data.hello}</h2> 
