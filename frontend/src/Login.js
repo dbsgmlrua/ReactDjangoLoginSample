@@ -1,25 +1,20 @@
 import useGetAxios from "./useAxios";
 import { useState } from "react";
 
-const loginForm ={
-    id: "",
-    pw: ""
-}
+
 
 const Login = () => {
-    const [state, setState] = useState(loginForm);
+    const [loginForm, setLoginForm] = useState({id: "", pw: ""})
     const [activateBtn, setActivateBtn] = useState(true);
     
     const handleEachInput = (e) => {
         const { id, value } = e.target;
-        setState({
-            [id]: value,
-        });
-        console.log(state);
+        setLoginForm({...loginForm, [id]: value});
+        console.log(loginForm);
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(state);
+        console.log(loginForm);
     };
 
     return ( 
