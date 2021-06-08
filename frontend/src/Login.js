@@ -1,8 +1,6 @@
 import useGetAxios from "./useAxios";
 import { useState } from "react";
 
-
-
 const Login = () => {
     const [loginForm, setLoginForm] = useState({id: "", pw: ""})
     const [activateBtn, setActivateBtn] = useState(true);
