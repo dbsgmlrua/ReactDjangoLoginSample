@@ -1,9 +1,11 @@
-import useGetAxios from "./useAxios";
+import axiosInstance from "./axiosApi";
 import { useState } from "react";
+import {useHistory} from 'react-router-dom';
 
 const Login = () => {
     const [loginForm, setLoginForm] = useState({id: "", pw: ""})
     const [activateBtn, setActivateBtn] = useState(true);
+    const history = useHistory();
     
     const handleEachInput = (e) => {
         const { id, value } = e.target;
@@ -12,7 +14,23 @@ const Login = () => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
+        
         console.log(loginForm);
+        axiosInstance.post('/token/obtain/', {
+            username: loginForm.id,
+            password: loginForm.pw
+        }).then(
+            result => {
+                console.log(result.data);
+                axiosInstance.defaults.headers['Authorization'] = "JWT " + result.data.access;
+                localStorage.setItem('access_token', result.data.access);
+                localStorage.setItem('refresh_token', result.data.refresh);
+                history.push('/');
+            },
+            error =>{
+                throw error;
+            }
+        )
     };
 
     return ( 
