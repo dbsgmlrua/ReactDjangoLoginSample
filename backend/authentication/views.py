@@ -8,7 +8,6 @@ from .models import CustomUser
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-
 class CustomUserCreate(APIView):
     permission_classes = (permissions.AllowAny,)
 
